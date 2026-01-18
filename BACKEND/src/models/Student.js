@@ -2,16 +2,17 @@ import mongoose from "mongoose";
 
 const studentSchema = new mongoose.Schema(
   {
-    accountId: { type: mongoose.Schema.Types.ObjectId, ref: "Account" },
+    accountId: { type: mongoose.Schema.Types.ObjectId, ref: "Account",   required: true,
+      index: true, },
 
     studentName: { type: String, required: true },
     studentAge: Number,
 
-    parentName: String,
-    parentEmail: String,
+    parentName: { type: String, required: true },
+    parentEmail: { type: String, required: true },
 
-    timezone: String,
-    country: String,
+     timezone: { type: String },
+    country: { type: String },
 
     studentType: {
       type: String,
@@ -19,13 +20,20 @@ const studentSchema = new mongoose.Schema(
       required: true,
     },
 
-    level: String,
-    chessUsernames: [String],
-    rating: Number,
+    level: { type: String },
+     chessUsernames: [{ type: String }],
+    rating: { type: Number },
 
-    assignedCoachId: { type: mongoose.Schema.Types.ObjectId, ref: "Account" },
-    assignedBatchId: { type: String },
-
+    assignedCoachId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Coach",
+      default: null,
+    },
+     assignedBatchId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Batch",
+      default: null,
+    },
     status: {
       type: String,
       enum: ["ACTIVE", "PAUSED", "CANCELLED"],

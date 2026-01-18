@@ -2,11 +2,10 @@ import mongoose from "mongoose";
 
 const demoSchema = new mongoose.Schema(
   {
-    studentName: String,
-    parentName: String,
-    parentEmail: String,
-    timezone: String,
-
+  studentName: { type: String, required: true },
+  parentName: { type: String, required: true },
+  parentEmail: { type: String, required: true },
+  timezone: String, 
     scheduledStart: Date,
     scheduledEnd: Date,
 
